@@ -13,6 +13,7 @@ public class MarcheurTest {
     private Lieu Pullman;
     private Lieu Balancoire;
     private Lieu ESTI;
+    private Lieu Boulevard_De_lEurope;
     private Carte carte;
 
     @BeforeEach
@@ -20,21 +21,25 @@ public class MarcheurTest {
         HEI = new Lieu("HEI");
         Pullman = new Lieu("Pullman");
         Balancoire = new Lieu("Balancoire");
+        Boulevard_De_lEurope = new Lieu("Boulevard de l'Europe");
         ESTI = new Lieu("ESTI");
 
         Map<String, Lieu> lieux = new HashMap<>();
         lieux.put(HEI.getNom(), HEI);
         lieux.put(Pullman.getNom(), Pullman);
         lieux.put(Balancoire.getNom(), Balancoire);
+        lieux.put(Boulevard_De_lEurope.getNom(), Boulevard_De_lEurope);
         lieux.put(ESTI.getNom(), ESTI);
 
         Map<String, Rue> rues = new HashMap<>();
         Rue rue1 = new Rue(HEI, Pullman, "Andriatsihoarana");
         Rue rue2 = new Rue(Pullman, Balancoire, "Ranaivo");
-        Rue rue3 = new Rue(Balancoire, ESTI, "SansNom");
+        Rue rue3 = new Rue(Balancoire, Boulevard_De_lEurope, "SansNom");
+        Rue rue4 = new Rue(Boulevard_De_lEurope, ESTI, "Ravelojaona");
         rues.put("Andriatsihoarana", rue1);
         rues.put("Ranaivo", rue2);
         rues.put("SansNom", rue3);
+        rues.put("Ravelojaona", rue4);
 
         carte = new Carte(lieux, rues);
     }
