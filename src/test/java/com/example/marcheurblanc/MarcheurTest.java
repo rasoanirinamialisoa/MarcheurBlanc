@@ -48,6 +48,7 @@ public class MarcheurTest {
         assertFalse(trajet.getChemin().isEmpty());
         assertEquals(HEI, trajet.getChemin().get(0));
         assertEquals(ESTI, trajet.getChemin().get(trajet.getChemin().size() - 1));
+        assertTrue(marcheur.getLieuxVisites().contains(ESTI));
         System.out.println("Trajet parcouru :");
         for (Lieu lieu : trajet.getChemin()) {
             System.out.println(lieu.getNom());
