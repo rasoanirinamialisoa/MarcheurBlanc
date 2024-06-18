@@ -14,7 +14,6 @@ public class MarcheurTest {
     private Lieu Balancoire;
     private Lieu ESTI;
     private Lieu Boulevard_De_lEurope;
-    private Carte carte;
 
     @BeforeEach
     public void setUp() {
@@ -23,13 +22,10 @@ public class MarcheurTest {
         Balancoire = new Lieu("Balancoire");
         Boulevard_De_lEurope = new Lieu("Boulevard de l'Europe");
         ESTI = new Lieu("ESTI");
+    }
 
-        Map<String, Lieu> lieux = new HashMap<>();
-        lieux.put(HEI.getNom(), HEI);
-        lieux.put(Pullman.getNom(), Pullman);
-        lieux.put(Balancoire.getNom(), Balancoire);
-        lieux.put(Boulevard_De_lEurope.getNom(), Boulevard_De_lEurope);
-        lieux.put(ESTI.getNom(), ESTI);
+    @Test
+    public void testMarcherVersDestination() {
 
         Map<String, Rue> rues = new HashMap<>();
         Rue rue1 = new Rue(HEI, Pullman, "Andriatsihoarana");
@@ -41,13 +37,8 @@ public class MarcheurTest {
         rues.put("SansNom", rue3);
         rues.put("Ravelojaona", rue4);
 
-        carte = new Carte(lieux, rues);
-    }
-
-    @Test
-    public void testMarcherVersDestination() {
         Marcheur marcheur = new Marcheur("Islande", HEI);
-        Trajet trajet = marcheur.marcher(HEI, ESTI, carte);
+        Trajet trajet = marcheur.marcher(HEI, ESTI, rues);
 
         assertNotNull(trajet);
         assertFalse(trajet.getChemin().isEmpty());

@@ -4,17 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
-
+import java.util.*;
 @Getter
 @Setter
 @AllArgsConstructor
-@NoArgsConstructor
+
 public class Marcheur {
     private String origine;
     private Lieu positionActuelle;
@@ -25,17 +19,17 @@ public class Marcheur {
         this.positionActuelle = positionActuelle;
         this.lieuxVisites = new HashSet<>();
     }
-    public Trajet marcher(Lieu depart, Lieu arriver, Carte carte) {
+
+    public Trajet marcher(Lieu depart, Lieu arriver, Map<String, Rue> rues) {
         List<Lieu> chemin = new ArrayList<>();
         chemin.add(depart);
         positionActuelle = depart;
         lieuxVisites.add(depart);
 
         Random random = new Random();
-
         while (!positionActuelle.equals(arriver)) {
             List<Rue> ruesDisponiblesTraverser = new ArrayList<>();
-            for (Rue rue : carte.getRues().values()) {
+            for (Rue rue : rues.values()) {
                 if ((rue.getLieu1().equals(positionActuelle) || rue.getLieu2().equals(positionActuelle)) &&
                         (!lieuxVisites.contains(rue.getAutreLieu(positionActuelle)))) {
                     ruesDisponiblesTraverser.add(rue);
@@ -47,7 +41,14 @@ public class Marcheur {
             chemin.add(positionActuelle);
             lieuxVisites.add(positionActuelle);
         }
-
         return new Trajet(chemin);
+    }
+
+    public Set<Lieu> getLieuxVisites() {
+        return lieuxVisites;
+    }
+
+    public static void main(String[] args) {
+        System.out.println("Trajet parcouru :");
     }
 }
